@@ -46,6 +46,7 @@
         body {
             margin: 0;
             min-height: 100vh;
+            overflow-x: hidden;
             font-family: "Manrope", sans-serif;
             color: var(--text);
             background:
@@ -1882,16 +1883,64 @@
         }
 
         @media (max-width: 760px) {
+            .page-shell {
+                width: min(var(--max-width), calc(100% - 20px));
+            }
+
+            .topbar-wrap {
+                padding-top: 12px;
+            }
+
             .topbar {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 14px;
+                padding: 16px 18px 18px;
                 border-radius: 24px;
             }
 
+            .brand {
+                width: max-content;
+            }
+
             .nav {
-                gap: 12px 16px;
+                display: grid;
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+                justify-items: center;
+                gap: 10px 12px;
+                width: 100%;
+            }
+
+            .nav a {
+                width: 100%;
+                font-size: 0.92rem;
+                text-align: center;
             }
 
             .hero {
-                padding-top: 58px;
+                gap: 24px;
+                padding-top: 42px;
+            }
+
+            .hero-summary {
+                font-size: 0.98rem;
+                line-height: 1.74;
+            }
+
+            .button-row {
+                margin-bottom: 26px;
+            }
+
+            .hero-socials {
+                gap: 10px;
+            }
+
+            .hero-social {
+                justify-content: center;
+            }
+
+            .portrait-frame {
+                width: min(280px, 76vw);
             }
 
             .panel,
@@ -1981,6 +2030,53 @@
 
             .contact-value {
                 text-align: left;
+            }
+        }
+
+        @media (max-width: 520px) {
+            .topbar {
+                border-radius: 22px;
+            }
+
+            .brand {
+                margin: 0 auto;
+            }
+
+            .nav {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 10px;
+            }
+
+            .nav a:last-child {
+                grid-column: 1 / -1;
+                max-width: 160px;
+            }
+
+            .hero h1 {
+                font-size: clamp(2.1rem, 10vw, 2.8rem);
+                line-height: 1.02;
+            }
+
+            .hero-tagline {
+                font-size: 1rem;
+            }
+
+            .button-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .button {
+                width: 100%;
+            }
+
+            .hero-socials {
+                grid-template-columns: 1fr 1fr;
+                display: grid;
+            }
+
+            .portrait-frame {
+                width: min(248px, 72vw);
             }
         }
 
