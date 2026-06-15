@@ -1,33 +1,35 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Afroz K. | Portfolio</title>
-    <meta name="description"
-        content="Portfolio website for Afroz K. showcasing web development, automation, and AI workflow projects.">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Afroz Khan | Full-Stack Developer</title>
+    <meta
+        name="description"
+        content="Afroz Khan portfolio showcasing full-stack development, fintech systems, web3 products, and AI-assisted engineering workflows.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Space+Grotesk:wght@400;500;700&display=swap"
         rel="stylesheet">
     <style>
         :root {
-            --bg: #0d1417;
-            --bg-soft: #152026;
-            --surface: rgba(255, 255, 255, 0.06);
-            --surface-strong: rgba(255, 255, 255, 0.1);
-            --text: #eef6f2;
-            --muted: #9bb5ab;
-            --line: rgba(255, 255, 255, 0.14);
-            --accent: #ff7b54;
-            --accent-soft: #ffd166;
-            --mint: #64f4c8;
+            --bg: #07111f;
+            --bg-soft: #0d1830;
+            --panel: rgba(11, 24, 47, 0.9);
+            --panel-strong: rgba(12, 31, 58, 0.96);
+            --border: rgba(127, 189, 255, 0.18);
+            --text: #f7fbff;
+            --muted: #9ab0ca;
+            --accent: #59f0d6;
+            --accent-2: #ff8a5c;
+            --accent-3: #8cb8ff;
             --shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
-            --radius: 24px;
-            --radius-sm: 16px;
-            --max: 1180px;
+            --radius-xl: 32px;
+            --radius-lg: 24px;
+            --radius-md: 18px;
+            --radius-sm: 12px;
+            --max-width: 1180px;
         }
 
         * {
@@ -40,12 +42,14 @@
 
         body {
             margin: 0;
+            min-height: 100vh;
             font-family: "Manrope", sans-serif;
-            background:
-                radial-gradient(circle at top left, rgba(255, 123, 84, 0.18), transparent 30%),
-                radial-gradient(circle at 85% 15%, rgba(100, 244, 200, 0.16), transparent 24%),
-                linear-gradient(180deg, #071015 0%, #0d1417 40%, #101c20 100%);
             color: var(--text);
+            background:
+                radial-gradient(circle at top left, rgba(89, 240, 214, 0.14), transparent 28%),
+                radial-gradient(circle at top right, rgba(140, 184, 255, 0.18), transparent 28%),
+                radial-gradient(circle at 50% 120%, rgba(255, 138, 92, 0.12), transparent 34%),
+                linear-gradient(180deg, #05101d 0%, #081629 45%, #050c16 100%);
         }
 
         a {
@@ -58,25 +62,29 @@
             display: block;
         }
 
-        .shell {
-            width: min(calc(100% - 32px), var(--max));
+        .page-shell {
+            width: min(var(--max-width), calc(100% - 32px));
             margin: 0 auto;
         }
 
-        .topbar {
+        .topbar-wrap {
             position: sticky;
             top: 0;
-            z-index: 30;
-            backdrop-filter: blur(18px);
-            background: rgba(7, 16, 21, 0.72);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            z-index: 20;
+            padding-top: 18px;
         }
 
-        .topbar .shell {
+        .topbar {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 18px 0;
+            gap: 18px;
+            padding: 16px 20px;
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            background: rgba(5, 12, 22, 0.76);
+            backdrop-filter: blur(14px);
+            box-shadow: 0 18px 50px rgba(0, 0, 0, 0.25);
         }
 
         .brand {
@@ -84,321 +92,478 @@
             align-items: center;
             gap: 12px;
             font-family: "Space Grotesk", sans-serif;
-            font-size: 1rem;
+            font-weight: 700;
             letter-spacing: 0.04em;
         }
 
         .brand-mark {
+            display: inline-grid;
+            place-items: center;
             width: 42px;
             height: 42px;
-            display: grid;
-            place-items: center;
             border-radius: 14px;
-            color: #101c20;
-            background: linear-gradient(135deg, var(--mint), var(--accent-soft));
-            font-weight: 700;
+            background: linear-gradient(135deg, rgba(89, 240, 214, 0.18), rgba(140, 184, 255, 0.32));
+            border: 1px solid rgba(89, 240, 214, 0.28);
+            color: var(--accent);
         }
 
         .nav {
             display: flex;
+            align-items: center;
             flex-wrap: wrap;
-            gap: 20px;
+            gap: 18px;
+        }
+
+        .nav a {
             color: var(--muted);
             font-size: 0.96rem;
+            transition: color 180ms ease, transform 180ms ease;
+        }
+
+        .nav a:hover,
+        .nav a:focus-visible {
+            color: var(--text);
+            transform: translateY(-1px);
         }
 
         .hero {
-            padding: 64px 0 28px;
-        }
-
-        .hero-grid {
             display: grid;
-            gap: 28px;
-            grid-template-columns: 1.15fr 0.85fr;
-            align-items: stretch;
-        }
-
-        .hero-copy,
-        .hero-panel,
-        .section-card,
-        .project,
-        .timeline-item,
-        .contact-card {
-            background: var(--surface);
-            border: 1px solid var(--line);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-        }
-
-        .hero-copy {
-            padding: 40px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-copy::after {
-            content: "";
-            position: absolute;
-            inset: auto -60px -60px auto;
-            width: 180px;
-            height: 180px;
-            border-radius: 999px;
-            background: radial-gradient(circle, rgba(255, 209, 102, 0.22), transparent 70%);
+            grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
+            gap: 30px;
+            padding: 92px 0 36px;
+            align-items: center;
         }
 
         .eyebrow {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 10px 14px;
-            border-radius: 999px;
-            background: rgba(255, 255, 255, 0.05);
-            color: var(--muted);
-            font-size: 0.9rem;
-            letter-spacing: 0.02em;
+            margin: 0 0 12px;
+            color: var(--accent);
+            font-size: 0.92rem;
+            font-weight: 700;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
         }
 
-        .eyebrow::before {
-            content: "";
-            width: 10px;
-            height: 10px;
-            border-radius: 999px;
-            background: var(--mint);
-            box-shadow: 0 0 0 6px rgba(100, 244, 200, 0.14);
-        }
-
-        h1,
-        h2,
-        h3 {
-            font-family: "Space Grotesk", sans-serif;
-            line-height: 1.02;
+        .hero h1 {
             margin: 0;
+            font-family: "Space Grotesk", sans-serif;
+            font-size: clamp(3rem, 7vw, 5.6rem);
+            line-height: 0.94;
         }
 
-        h1 {
-            margin-top: 22px;
-            font-size: clamp(2.8rem, 6vw, 5.6rem);
-            max-width: 10ch;
+        .hero h1 span {
+            display: block;
+            color: rgba(255, 255, 255, 0.7);
         }
 
-        .hero-copy p {
-            margin: 22px 0 0;
-            max-width: 62ch;
+        .hero-tagline {
+            margin: 18px 0 16px;
+            color: #d5e4f5;
+            font-size: clamp(1.08rem, 2.2vw, 1.32rem);
+            font-weight: 700;
+        }
+
+        .hero-summary {
+            max-width: 740px;
+            margin: 0 0 26px;
             color: var(--muted);
-            font-size: 1.05rem;
-            line-height: 1.75;
+            font-size: 1.03rem;
+            line-height: 1.82;
         }
 
-        .actions {
+        .button-row {
             display: flex;
             flex-wrap: wrap;
             gap: 14px;
-            margin-top: 30px;
+            margin-bottom: 34px;
         }
 
         .button {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-            min-height: 50px;
-            padding: 0 20px;
+            min-height: 52px;
+            padding: 0 22px;
             border-radius: 999px;
             border: 1px solid transparent;
-            font-weight: 700;
-            transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+            font-weight: 800;
+            transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
         }
 
-        .button:hover {
-            transform: translateY(-1px);
+        .button:hover,
+        .button:focus-visible {
+            transform: translateY(-2px);
         }
 
         .button-primary {
-            color: #0d1417;
-            background: linear-gradient(135deg, var(--accent-soft), var(--accent));
+            color: #08201c;
+            background: linear-gradient(135deg, var(--accent), #8ef5de);
+            box-shadow: 0 20px 35px rgba(89, 240, 214, 0.22);
         }
 
         .button-secondary {
-            background: rgba(255, 255, 255, 0.04);
-            border-color: var(--line);
+            color: var(--text);
+            border-color: rgba(255, 255, 255, 0.16);
+            background: rgba(255, 255, 255, 0.03);
         }
 
-        .hero-panel {
-            padding: 26px;
-            display: grid;
-            gap: 16px;
+        .button-secondary:hover,
+        .button-secondary:focus-visible {
+            border-color: rgba(89, 240, 214, 0.35);
+            box-shadow: 0 16px 28px rgba(89, 240, 214, 0.08);
         }
 
-        .hero-panel-top {
+        .stats {
             display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
             gap: 14px;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
         }
 
-        .metric,
-        .mini-card {
-            padding: 18px;
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: var(--radius-sm);
+        .stat {
+            padding: 18px 18px 20px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            background: rgba(255, 255, 255, 0.03);
         }
 
-        .metric strong,
-        .mini-card strong {
+        .stat strong {
             display: block;
-            font-family: "Space Grotesk", sans-serif;
-            font-size: 1.6rem;
             margin-bottom: 8px;
+            font-size: 1.2rem;
+            color: var(--text);
         }
 
-        .metric span,
-        .mini-card span {
+        .stat span {
             color: var(--muted);
-            line-height: 1.6;
-            font-size: 0.95rem;
+            font-size: 0.92rem;
+            line-height: 1.5;
         }
 
-        .spotlight {
-            padding: 22px;
-            border-radius: var(--radius-sm);
+        .hero-visual {
+            position: relative;
+        }
+
+        .hero-card {
+            position: relative;
+            overflow: hidden;
+            padding: 28px;
+            border: 1px solid rgba(140, 184, 255, 0.18);
+            border-radius: var(--radius-xl);
             background:
-                linear-gradient(180deg, rgba(255, 123, 84, 0.12), rgba(255, 123, 84, 0)),
-                rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 123, 84, 0.22);
+                radial-gradient(circle at top left, rgba(89, 240, 214, 0.18), transparent 30%),
+                linear-gradient(160deg, rgba(10, 28, 52, 0.97), rgba(5, 14, 30, 0.96));
+            box-shadow: var(--shadow);
         }
 
-        .spotlight p {
+        .hero-card::before {
+            content: "";
+            position: absolute;
+            inset: 18px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: calc(var(--radius-xl) - 8px);
+            pointer-events: none;
+        }
+
+        .orb {
+            width: 132px;
+            height: 132px;
+            display: grid;
+            place-items: center;
+            margin-bottom: 28px;
+            border-radius: 40px;
+            border: 1px solid rgba(89, 240, 214, 0.28);
+            background:
+                radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.22), transparent 24%),
+                linear-gradient(145deg, rgba(89, 240, 214, 0.18), rgba(140, 184, 255, 0.32));
+            color: var(--text);
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+        }
+
+        .hero-card h2 {
+            margin: 0 0 10px;
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 1.45rem;
+            line-height: 1.3;
+        }
+
+        .hero-card p {
+            margin: 0 0 22px;
             color: var(--muted);
-            line-height: 1.7;
-            margin: 10px 0 0;
+            line-height: 1.72;
+        }
+
+        .signal-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .signal {
+            padding: 10px 13px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 999px;
+            color: #d5e4f5;
+            font-size: 0.84rem;
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .marquee-wrap {
+            overflow: hidden;
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.03);
+            margin-bottom: 26px;
+        }
+
+        .marquee-track {
+            display: flex;
+            width: max-content;
+            animation: scroll 28s linear infinite;
+        }
+
+        .marquee-group {
+            display: flex;
+            gap: 14px;
+            padding: 14px 18px;
+        }
+
+        .marquee-chip {
+            white-space: nowrap;
+            padding: 10px 15px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.04);
+            color: #d9e7f6;
+            font-size: 0.9rem;
+        }
+
+        @keyframes scroll {
+            from {
+                transform: translateX(0);
+            }
+
+            to {
+                transform: translateX(-50%);
+            }
         }
 
         .section {
-            padding: 28px 0;
+            padding: 44px 0;
         }
 
-        .section-heading {
-            display: flex;
-            justify-content: space-between;
-            gap: 16px;
-            align-items: end;
-            margin-bottom: 20px;
-        }
-
-        .section-heading p {
-            margin: 0;
-            max-width: 52ch;
-            color: var(--muted);
-            line-height: 1.7;
-        }
-
-        .grid-3 {
+        .section-head {
             display: grid;
-            gap: 18px;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 10px;
+            margin-bottom: 24px;
         }
 
-        .section-card {
-            padding: 26px;
-        }
-
-        .section-card h3 {
-            margin-bottom: 12px;
-            font-size: 1.35rem;
-        }
-
-        .section-card p {
+        .section-label {
             margin: 0;
-            color: var(--muted);
-            line-height: 1.7;
-        }
-
-        .project-grid {
-            display: grid;
-            gap: 18px;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-        }
-
-        .project {
-            padding: 26px;
-        }
-
-        .project-label {
-            display: inline-block;
-            margin-bottom: 14px;
-            color: var(--accent-soft);
-            font-size: 0.85rem;
-            letter-spacing: 0.08em;
+            color: var(--accent);
+            font-size: 0.84rem;
+            font-weight: 800;
+            letter-spacing: 0.18em;
             text-transform: uppercase;
         }
 
-        .project p {
-            margin: 14px 0 0;
-            color: var(--muted);
-            line-height: 1.7;
+        .section-title {
+            margin: 0;
+            font-family: "Space Grotesk", sans-serif;
+            font-size: clamp(2rem, 3vw, 2.7rem);
+            line-height: 1.08;
         }
 
-        .project ul {
-            margin: 18px 0 0;
-            padding-left: 18px;
+        .section-copy {
+            max-width: 760px;
+            margin: 0;
             color: var(--muted);
             line-height: 1.8;
         }
 
-        .timeline {
+        .about-grid,
+        .contact-grid {
             display: grid;
-            gap: 16px;
+            grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+            gap: 22px;
         }
 
-        .timeline-item {
-            padding: 22px 24px;
-            display: grid;
-            gap: 14px;
-            grid-template-columns: 140px 1fr;
+        .panel {
+            padding: 26px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            background: var(--panel);
+            box-shadow: var(--shadow);
         }
 
-        .timeline-date {
-            color: var(--accent-soft);
-            font-family: "Space Grotesk", sans-serif;
-        }
-
-        .timeline-copy h3 {
+        .panel strong {
+            display: inline-block;
             margin-bottom: 10px;
-            font-size: 1.2rem;
+            color: #cfe5ff;
+            font-size: 0.9rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
         }
 
-        .timeline-copy p {
+        .panel h3 {
+            margin: 0 0 12px;
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 1.5rem;
+            line-height: 1.24;
+        }
+
+        .panel p {
             margin: 0;
             color: var(--muted);
+            line-height: 1.76;
+        }
+
+        .detail-list {
+            margin: 18px 0 0;
+            padding: 0 0 0 18px;
+            color: #dce8f8;
             line-height: 1.7;
         }
 
-        .contact-grid {
+        .detail-list li + li {
+            margin-top: 10px;
+        }
+
+        .tag-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .tag {
+            padding: 10px 13px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.035);
+            color: #dce8f8;
+            font-size: 0.88rem;
+        }
+
+        .skill-grid,
+        .project-grid,
+        .timeline-grid {
             display: grid;
             gap: 18px;
-            grid-template-columns: 1.1fr 0.9fr;
+        }
+
+        .skill-grid {
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+        }
+
+        .skill-card,
+        .project-card,
+        .timeline-card {
+            padding: 24px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            background: rgba(255, 255, 255, 0.03);
+            box-shadow: var(--shadow);
+        }
+
+        .skill-card h3,
+        .project-card h3,
+        .timeline-card h3 {
+            margin: 0 0 10px;
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 1.22rem;
+        }
+
+        .skill-card p,
+        .project-card p,
+        .timeline-card p {
+            margin: 0;
+            color: var(--muted);
+            line-height: 1.72;
+        }
+
+        .skill-card ul,
+        .project-card ul {
+            margin: 16px 0 0;
+            padding-left: 18px;
+            color: #dce8f8;
+            line-height: 1.72;
+        }
+
+        .project-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .project-card {
+            position: relative;
+            overflow: hidden;
+            background:
+                linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02)),
+                rgba(255, 255, 255, 0.02);
+        }
+
+        .project-card::after {
+            content: "";
+            position: absolute;
+            inset: auto -40px -80px auto;
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(89, 240, 214, 0.14), transparent 72%);
+            pointer-events: none;
+        }
+
+        .project-type,
+        .timeline-meta {
+            display: inline-block;
+            margin-bottom: 12px;
+            color: var(--accent);
+            font-size: 0.82rem;
+            font-weight: 800;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+        }
+
+        .stack-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 18px;
+        }
+
+        .stack-chip {
+            padding: 9px 12px;
+            border-radius: 999px;
+            background: rgba(140, 184, 255, 0.12);
+            color: #dce8f8;
+            font-size: 0.84rem;
+        }
+
+        .timeline-grid {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
         }
 
         .contact-card {
-            padding: 30px;
+            min-height: 100%;
         }
 
-        .contact-card p {
-            color: var(--muted);
-            line-height: 1.7;
+        .contact-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 22px;
         }
 
         .contact-list {
             display: grid;
             gap: 14px;
-            margin-top: 18px;
+            margin: 0;
         }
 
         .contact-line {
             display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
             justify-content: space-between;
+            gap: 18px;
             padding-bottom: 14px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         }
@@ -412,336 +577,508 @@
             color: var(--muted);
         }
 
-        .footer {
-            padding: 34px 0 48px;
+        .contact-value {
+            text-align: right;
+            color: var(--text);
+            word-break: break-word;
+        }
+
+        footer {
+            padding: 34px 0 56px;
             color: var(--muted);
             font-size: 0.92rem;
         }
 
-        .footer .shell {
+        .footer-line {
             display: flex;
-            justify-content: space-between;
-            gap: 16px;
             flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding-top: 24px;
             border-top: 1px solid rgba(255, 255, 255, 0.08);
-            padding-top: 20px;
         }
 
-        @media (max-width: 980px) {
-
-            .hero-grid,
-            .grid-3,
+        @media (max-width: 1080px) {
+            .hero,
+            .about-grid,
+            .contact-grid,
             .project-grid,
-            .contact-grid {
+            .timeline-grid {
                 grid-template-columns: 1fr;
             }
 
-            .timeline-item {
-                grid-template-columns: 1fr;
+            .skill-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
             }
 
-            .hero-panel-top {
-                grid-template-columns: 1fr 1fr;
+            .stats {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
             }
         }
 
-        @media (max-width: 640px) {
-
-            .topbar .shell,
-            .section-heading,
-            .footer .shell {
-                display: grid;
+        @media (max-width: 760px) {
+            .topbar {
+                border-radius: 24px;
             }
 
             .nav {
-                gap: 12px 18px;
+                gap: 12px 16px;
             }
 
             .hero {
-                padding-top: 40px;
+                padding-top: 58px;
             }
 
-            .hero-copy,
-            .hero-panel,
-            .section-card,
-            .project,
-            .timeline-item,
-            .contact-card {
+            .hero-card,
+            .panel,
+            .skill-card,
+            .project-card,
+            .timeline-card {
                 padding: 22px;
             }
 
-            .hero-panel-top {
+            .skill-grid,
+            .stats {
                 grid-template-columns: 1fr;
             }
 
-            h1 {
-                font-size: clamp(2.3rem, 12vw, 4rem);
+            .contact-line {
+                flex-direction: column;
+            }
+
+            .contact-value {
+                text-align: left;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            .marquee-track {
+                animation: none;
+            }
+
+            .button,
+            .nav a {
+                transition: none;
             }
         }
     </style>
 </head>
-
 <body>
-    <header class="topbar">
-        <div class="shell">
-            <a class="brand" href="#home">
-                <span class="brand-mark">AK</span>
-                <span>Afroz K.</span>
-            </a>
-            <nav class="nav">
-                <a href="#about">About</a>
-                <a href="#work">Work</a>
-                <a href="#services">Services</a>
-                <a href="#contact">Contact</a>
-            </nav>
+    <div class="page-shell">
+        <div class="topbar-wrap">
+            <header class="topbar">
+                <a class="brand" href="#home" aria-label="Afroz Khan home">
+                    <span class="brand-mark">AK</span>
+                    <span>Afroz Khan</span>
+                </a>
+                <nav class="nav" aria-label="Primary">
+                    <a href="#about">About</a>
+                    <a href="#skills">Skills</a>
+                    <a href="#projects">Projects</a>
+                    <a href="#experience">Experience</a>
+                    <a href="#contact">Contact</a>
+                </nav>
+            </header>
         </div>
-    </header>
 
-    <main id="home">
-        <section class="hero">
-            <div class="shell hero-grid">
-                <article class="hero-copy">
-                    <span class="eyebrow">Available for freelance and product collaborations</span>
-                    <h1>Building useful web experiences with clarity and speed.</h1>
-                    <p>
-                        I design and ship polished web products, automation workflows, and AI-powered tools.
-                        My focus is simple: make things faster, clearer, and easier to use.
+        <main>
+            <section class="hero" id="home">
+                <div>
+                    <p class="eyebrow">Portfolio / FinTech / Web3 / GenAI</p>
+                    <h1>Hi, I'm <span>Afroz Khan</span></h1>
+                    <p class="hero-tagline">Full-Stack Developer | Web3 Engineer | FinTech Builder | AI Workflow Explorer</p>
+                    <p class="hero-summary">
+                        I build secure, high-performance digital products across Laravel, React.js, Node.js, modern
+                        automation flows, and web3-enabled systems. My work spans lending platforms, workflow-heavy
+                        enterprise products, blockchain infrastructure, and AI-assisted engineering pipelines.
                     </p>
-                    <div class="actions">
-                        <a class="button button-primary" href="#work">View Projects</a>
-                        <a class="button button-secondary" href="#contact">Contact Me</a>
+                    <div class="button-row">
+                        <a class="button button-primary" href="#projects">View Projects</a>
+                        <a class="button button-secondary" href="#contact">Hire Me</a>
                     </div>
-                </article>
+                    <div class="stats" aria-label="Highlights">
+                        <div class="stat">
+                            <strong>FinTech</strong>
+                            <span>Enterprise lending systems, workflow engines, and scalable product delivery.</span>
+                        </div>
+                        <div class="stat">
+                            <strong>Web3</strong>
+                            <span>Wallet flows, transaction systems, smart contract integrations, and APIs.</span>
+                        </div>
+                        <div class="stat">
+                            <strong>Full Stack</strong>
+                            <span>Laravel, React, Node.js, databases, deployments, and modern product architecture.</span>
+                        </div>
+                        <div class="stat">
+                            <strong>AI Workflows</strong>
+                            <span>Prompt-driven automation, developer productivity, and content process tooling.</span>
+                        </div>
+                    </div>
+                </div>
 
-                <aside class="hero-panel">
-                    <div class="hero-panel-top">
-                        <div class="metric">
-                            <strong>5+</strong>
-                            <span>Years exploring product builds, AI workflows, and practical automation.</span>
-                        </div>
-                        <div class="metric">
-                            <strong>24/7</strong>
-                            <span>Product thinking with a builder mindset focused on real output.</span>
-                        </div>
-                    </div>
-                    <div class="spotlight">
-                        <h3>What I do best</h3>
+                <div class="hero-visual">
+                    <article class="hero-card">
+                        <div class="orb">AK</div>
+                        <h2>Building products where reliability matters.</h2>
                         <p>
-                            I turn ideas into working interfaces, admin dashboards, landing pages,
-                            and internal tools that feel sharp on desktop and mobile.
+                            My recent focus is on systems that combine business workflows, engineering speed, and
+                            practical automation, especially in fintech and operationally complex applications.
                         </p>
-                    </div>
-                    <div class="mini-card">
-                        <strong>Current focus</strong>
-                        <span>Static websites, portfolio experiences, lightweight product pages, and AI-assisted
-                            business workflows.</span>
-                    </div>
-                </aside>
-            </div>
-        </section>
-
-        <section class="section" id="about">
-            <div class="shell">
-                <div class="section-heading">
-                    <div>
-                        <h2>About</h2>
-                    </div>
-                    <p>
-                        This portfolio is built as a clean static website so it can be deployed quickly on free hosting.
-                        You can edit the text, links, and project details directly in one HTML file.
-                    </p>
+                        <div class="signal-grid">
+                            <span class="signal">Loan Origination Systems</span>
+                            <span class="signal">Loan Management Systems</span>
+                            <span class="signal">Workflow Automation</span>
+                            <span class="signal">React Dashboards</span>
+                            <span class="signal">Web3 Infrastructure</span>
+                            <span class="signal">Prompt Engineering</span>
+                        </div>
+                    </article>
                 </div>
-                <div class="grid-3">
-                    <article class="section-card">
-                        <h3>Frontend</h3>
-                        <p>I build responsive interfaces with strong visual hierarchy, clear messaging, and practical
-                            user flows.</p>
-                    </article>
-                    <article class="section-card">
-                        <h3>Automation</h3>
-                        <p>I connect repetitive business tasks with scripts, APIs, and AI workflows to save time and
-                            reduce manual work.</p>
-                    </article>
-                    <article class="section-card">
-                        <h3>Execution</h3>
-                        <p>I prefer simple systems that are easy to launch, easy to maintain, and ready to improve over
-                            time.</p>
-                    </article>
+            </section>
+
+            <div class="marquee-wrap" aria-label="Domains and focus areas">
+                <div class="marquee-track">
+                    <div class="marquee-group">
+                        <span class="marquee-chip">Enterprise Lending Platforms</span>
+                        <span class="marquee-chip">Loan Origination Workflows</span>
+                        <span class="marquee-chip">Loan Management Systems</span>
+                        <span class="marquee-chip">Microservices Architecture</span>
+                        <span class="marquee-chip">Blockchain Wallet Systems</span>
+                        <span class="marquee-chip">Real-Time APIs</span>
+                        <span class="marquee-chip">AI-Assisted Development</span>
+                        <span class="marquee-chip">Automation Pipelines</span>
+                    </div>
+                    <div class="marquee-group" aria-hidden="true">
+                        <span class="marquee-chip">Enterprise Lending Platforms</span>
+                        <span class="marquee-chip">Loan Origination Workflows</span>
+                        <span class="marquee-chip">Loan Management Systems</span>
+                        <span class="marquee-chip">Microservices Architecture</span>
+                        <span class="marquee-chip">Blockchain Wallet Systems</span>
+                        <span class="marquee-chip">Real-Time APIs</span>
+                        <span class="marquee-chip">AI-Assisted Development</span>
+                        <span class="marquee-chip">Automation Pipelines</span>
+                    </div>
                 </div>
             </div>
-        </section>
 
-        <section class="section" id="work">
-            <div class="shell">
-                <div class="section-heading">
-                    <div>
-                        <h2>Selected Work</h2>
-                    </div>
-                    <p>
-                        Replace these cards with your real projects. Keep the title, short summary, and 2 to 3 bullets
-                        for each project.
+            <section class="section" id="about">
+                <div class="section-head">
+                    <p class="section-label">About</p>
+                    <h2 class="section-title">A developer shaped by fintech complexity and product delivery.</h2>
+                    <p class="section-copy">
+                        This version of the portfolio leans into the same kind of project depth you referenced:
+                        enterprise finance systems, blockchain-backed products, and practical AI-enhanced workflows.
                     </p>
                 </div>
+
+                <div class="about-grid">
+                    <article class="panel">
+                        <strong>Current Focus</strong>
+                        <h3>Enterprise-grade systems with strong operational logic.</h3>
+                        <p>
+                            I work on workflow-heavy software where performance, auditability, configurability, and
+                            reliable delivery matter. That includes lending products, dynamic business processes,
+                            reusable backend services, and interfaces that keep complex flows usable.
+                        </p>
+                        <ul class="detail-list">
+                            <li>Workflow-driven lending journeys and configurable business logic.</li>
+                            <li>Reusable backend architecture for APIs, storage, monitoring, and automation.</li>
+                            <li>Modern product delivery using Laravel, React.js, Node.js, Docker, and cloud tools.</li>
+                            <li>AI-assisted engineering for content operations, prompt flows, and team productivity.</li>
+                        </ul>
+                    </article>
+
+                    <article class="panel">
+                        <strong>Profile</strong>
+                        <h3>Full-stack development with backend depth and product thinking.</h3>
+                        <p>
+                            I enjoy turning messy business requirements into structured software. My work typically
+                            sits at the intersection of backend systems, frontend usability, deployment workflows, and
+                            operational automation. Along the way, I use AI tools to shorten loops, improve output
+                            quality, and remove repetitive engineering work.
+                        </p>
+                        <div class="tag-cloud" aria-label="Technology stack">
+                            <span class="tag">Laravel</span>
+                            <span class="tag">PHP</span>
+                            <span class="tag">React.js</span>
+                            <span class="tag">Next.js</span>
+                            <span class="tag">Node.js</span>
+                            <span class="tag">Express.js</span>
+                            <span class="tag">MySQL</span>
+                            <span class="tag">MongoDB</span>
+                            <span class="tag">Redis</span>
+                            <span class="tag">Docker</span>
+                            <span class="tag">AWS</span>
+                            <span class="tag">Web3.js</span>
+                            <span class="tag">Ethers.js</span>
+                            <span class="tag">Solidity</span>
+                            <span class="tag">Prompt Engineering</span>
+                            <span class="tag">AI Workflow Design</span>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <section class="section" id="skills">
+                <div class="section-head">
+                    <p class="section-label">Skills</p>
+                    <h2 class="section-title">Technology stack and delivery strengths.</h2>
+                    <p class="section-copy">
+                        I’m comfortable across backend systems, modern frontend work, service design, deployment
+                        environments, and newer AI-first workflows that improve build speed and repeatability.
+                    </p>
+                </div>
+
+                <div class="skill-grid">
+                    <article class="skill-card">
+                        <h3>Laravel & PHP</h3>
+                        <p>Robust backend systems, REST APIs, modular architectures, and workflow-heavy platforms.</p>
+                        <ul>
+                            <li>MVC applications and reusable service layers</li>
+                            <li>Business rules, reporting flows, and integrations</li>
+                            <li>Audit-ready, configurable enterprise features</li>
+                        </ul>
+                    </article>
+
+                    <article class="skill-card">
+                        <h3>React & Frontend</h3>
+                        <p>Responsive user interfaces, dashboard systems, and product layers that stay usable at scale.</p>
+                        <ul>
+                            <li>React.js and Next.js applications</li>
+                            <li>Modern component-driven UI patterns</li>
+                            <li>Mobile-friendly layouts and clear information design</li>
+                        </ul>
+                    </article>
+
+                    <article class="skill-card">
+                        <h3>Node.js & Services</h3>
+                        <p>Service endpoints, real-time flows, middleware logic, and backend support for scalable apps.</p>
+                        <ul>
+                            <li>Express.js APIs and supporting utilities</li>
+                            <li>Queue-friendly and automation-friendly service design</li>
+                            <li>Database-backed application services</li>
+                        </ul>
+                    </article>
+
+                    <article class="skill-card">
+                        <h3>Web3 & AI Workflows</h3>
+                        <p>Blockchain product work and prompt-driven systems for content, productivity, and process automation.</p>
+                        <ul>
+                            <li>Wallet integrations and transaction-aware flows</li>
+                            <li>Prompt orchestration and AI-assisted engineering</li>
+                            <li>Automation experiments for repetitive business tasks</li>
+                        </ul>
+                    </article>
+                </div>
+            </section>
+
+            <section class="section" id="projects">
+                <div class="section-head">
+                    <p class="section-label">Projects</p>
+                    <h2 class="section-title">Enterprise and product work across fintech, web3, and automation.</h2>
+                    <p class="section-copy">
+                        The project stories below follow the same richer direction you asked for, with stronger detail
+                        around systems, workflows, and outcomes rather than short placeholder summaries.
+                    </p>
+                </div>
+
                 <div class="project-grid">
-                    <article class="project">
-                        <span class="project-label">Project 01</span>
-                        <h3>AI Article Workflow</h3>
+                    <article class="project-card">
+                        <span class="project-type">Enterprise FinTech Platform</span>
+                        <h3>Loan Origination System and Loan Management System</h3>
                         <p>
-                            A content generation workflow that combines keyword extraction, structured article creation,
-                            and feature image generation in one publishing pipeline.
+                            Built modular lending software for configurable onboarding, internal workflows, tracking,
+                            reporting, and enterprise operations. The focus was reliability, reusable flows, and
+                            scalable product structure rather than one-off custom screens.
                         </p>
                         <ul>
-                            <li>Built structured multi-step AI flow</li>
-                            <li>Added timing and debug visibility</li>
-                            <li>Prepared content for static publishing</li>
+                            <li>Microservice-style separation for UI logic, monitoring, storage, and business rules</li>
+                            <li>Configurable workflow journeys, dynamic forms, and reusable document/report patterns</li>
+                            <li>Audit trails, batch processes, and operational visibility across product flows</li>
                         </ul>
+                        <div class="stack-list">
+                            <span class="stack-chip">Laravel</span>
+                            <span class="stack-chip">MySQL</span>
+                            <span class="stack-chip">MongoDB</span>
+                            <span class="stack-chip">Docker</span>
+                            <span class="stack-chip">AWS</span>
+                        </div>
                     </article>
-                    <article class="project">
-                        <span class="project-label">Project 02</span>
-                        <h3>Portfolio Landing System</h3>
+
+                    <article class="project-card">
+                        <span class="project-type">Web3 Infrastructure</span>
+                        <h3>Multi-chain wallet ecosystem</h3>
                         <p>
-                            A fast-loading portfolio page designed for free static hosting with clear sections, strong
-                            typography,
-                            and zero build-step deployment.
+                            Worked on wallet-oriented product flows across chain interaction, secure transaction
+                            handling, and backend services supporting blockchain-aware applications.
                         </p>
                         <ul>
-                            <li>Single-file HTML deployment</li>
-                            <li>Responsive mobile-first layout</li>
-                            <li>Optimized for free hosting platforms</li>
+                            <li>Wallet connection and transaction-aware platform behavior</li>
+                            <li>Secure handling of blockchain-facing actions and supporting service layers</li>
+                            <li>Real-time product logic around transfer events, monitoring, and usability</li>
                         </ul>
+                        <div class="stack-list">
+                            <span class="stack-chip">Node.js</span>
+                            <span class="stack-chip">Express.js</span>
+                            <span class="stack-chip">Web3.js</span>
+                            <span class="stack-chip">Ethers.js</span>
+                            <span class="stack-chip">Blockchain APIs</span>
+                        </div>
                     </article>
-                    <article class="project">
-                        <span class="project-label">Project 03</span>
-                        <h3>Operations Dashboard</h3>
+
+                    <article class="project-card">
+                        <span class="project-type">Social and Reward Platform</span>
+                        <h3>Scalable engagement and rewards product</h3>
                         <p>
-                            A dashboard concept for internal teams to monitor campaign status, performance indicators,
-                            and workflow actions without unnecessary complexity.
+                            Supported large-user interaction patterns through backend APIs, reward-aware flows, and
+                            product infrastructure designed for growing traffic and responsive experiences.
                         </p>
                         <ul>
-                            <li>Focused visual hierarchy</li>
-                            <li>Fast navigation between core states</li>
-                            <li>Clean summary-first design</li>
+                            <li>High-performance APIs for user actions and engagement systems</li>
+                            <li>Reward-linked features with wallet-connected product logic</li>
+                            <li>Scalable backend structure for sustained traffic and recurring actions</li>
                         </ul>
+                        <div class="stack-list">
+                            <span class="stack-chip">Laravel</span>
+                            <span class="stack-chip">Vue.js</span>
+                            <span class="stack-chip">MySQL</span>
+                            <span class="stack-chip">REST APIs</span>
+                            <span class="stack-chip">Realtime Patterns</span>
+                        </div>
                     </article>
-                    <article class="project">
-                        <span class="project-label">Project 04</span>
-                        <h3>Client Automation Toolkit</h3>
+
+                    <article class="project-card">
+                        <span class="project-type">AI Automation Workflow</span>
+                        <h3>Prompt-driven content and productivity systems</h3>
                         <p>
-                            A lightweight collection of scripts and integrations that reduce manual processing for lead
-                            handling,
-                            reports, and repetitive content tasks.
+                            Experimenting with practical AI systems for keyword extraction, article generation,
+                            operational automation, and team-facing tooling where prompts are treated like reusable
+                            product inputs instead of one-off chat messages.
                         </p>
                         <ul>
-                            <li>Reduced manual repeat work</li>
-                            <li>Improved speed of delivery</li>
-                            <li>Easy to adapt per client need</li>
+                            <li>Prompt configuration, model calls, and response handling in reusable flows</li>
+                            <li>Agent-style orchestration for content and process generation steps</li>
+                            <li>Debug-friendly outputs with timing, counts, and process visibility</li>
                         </ul>
+                        <div class="stack-list">
+                            <span class="stack-chip">Laravel</span>
+                            <span class="stack-chip">OpenAI APIs</span>
+                            <span class="stack-chip">Automation</span>
+                            <span class="stack-chip">Prompt Engineering</span>
+                            <span class="stack-chip">Content Systems</span>
+                        </div>
                     </article>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <section class="section" id="services">
-            <div class="shell">
-                <div class="section-heading">
-                    <div>
-                        <h2>Services</h2>
-                    </div>
-                    <p>
-                        Keep this section if you want your portfolio to act like a lead page, or remove it if you want a
-                        simpler personal profile.
+            <section class="section" id="experience">
+                <div class="section-head">
+                    <p class="section-label">Experience</p>
+                    <h2 class="section-title">Experience themes that define how I work.</h2>
+                    <p class="section-copy">
+                        Instead of thin placeholders, this section now reflects the kind of delivery areas your
+                        referenced portfolio emphasizes: enterprise systems, product engineering, and modern workflows.
                     </p>
                 </div>
-                <div class="timeline">
-                    <article class="timeline-item">
-                        <div class="timeline-date">01</div>
-                        <div class="timeline-copy">
-                            <h3>Static Website Builds</h3>
-                            <p>I create fast portfolio sites, landing pages, and company profile pages that are easy to
-                                host and easy to update.</p>
-                        </div>
+
+                <div class="timeline-grid">
+                    <article class="timeline-card">
+                        <span class="timeline-meta">FinTech Delivery</span>
+                        <h3>Workflow-rich enterprise platforms</h3>
+                        <p>
+                            Built and supported lending systems with structured process flows, internal operations
+                            support, configurable business logic, and architecture that can grow with team needs.
+                        </p>
                     </article>
-                    <article class="timeline-item">
-                        <div class="timeline-date">02</div>
-                        <div class="timeline-copy">
-                            <h3>AI Workflow Setup</h3>
-                            <p>I help turn manual content or business tasks into repeatable AI-assisted flows with
-                                prompts, automation, and clear outputs.</p>
-                        </div>
+
+                    <article class="timeline-card">
+                        <span class="timeline-meta">Product Engineering</span>
+                        <h3>Full-stack builds across web and services</h3>
+                        <p>
+                            Worked across backend APIs, user-facing dashboards, database models, deployment steps, and
+                            integrations needed to turn product ideas into stable releases.
+                        </p>
                     </article>
-                    <article class="timeline-item">
-                        <div class="timeline-date">03</div>
-                        <div class="timeline-copy">
-                            <h3>Interface Cleanup</h3>
-                            <p>I improve structure, copy flow, and visual presentation so existing screens feel more
-                                focused and easier to use.</p>
-                        </div>
+
+                    <article class="timeline-card">
+                        <span class="timeline-meta">AI and Automation</span>
+                        <h3>Process improvement through reusable prompting</h3>
+                        <p>
+                            Applying AI tools to shorten development loops, automate repetitive tasks, and build more
+                            consistent internal workflows for writing, analysis, and engineering support.
+                        </p>
                     </article>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <section class="section" id="contact">
-            <div class="shell">
-                <div class="section-heading">
-                    <div>
-                        <h2>Contact</h2>
-                    </div>
-                    <p>
-                        Update these links before publishing. You can also remove any row you do not want to show
-                        publicly.
+            <section class="section" id="contact">
+                <div class="section-head">
+                    <p class="section-label">Contact</p>
+                    <h2 class="section-title">Let’s talk about product builds, fintech systems, or automation ideas.</h2>
+                    <p class="section-copy">
+                        This page is ready to be used as a richer portfolio landing page while your custom domain request
+                        is under review.
                     </p>
                 </div>
+
                 <div class="contact-grid">
-                    <article class="contact-card">
-                        <h3>Let us build something useful.</h3>
+                    <article class="panel contact-card">
+                        <strong>Get In Touch</strong>
+                        <h3>Available for meaningful full-stack and product work.</h3>
                         <p>
-                            If you need a portfolio site, landing page, dashboard front-end, or a simple AI workflow,
-                            reach out and we can shape a focused plan from there.
+                            If you need someone comfortable with Laravel, APIs, fintech workflows, AI-assisted systems,
+                            or end-to-end feature delivery, I’m happy to connect.
                         </p>
-                        <div class="actions">
-                            <a class="button button-primary" href="mailto:hello@example.com">Email Me</a>
-                            <a class="button button-secondary" href="https://github.com/" target="_blank"
-                                rel="noreferrer">GitHub</a>
+                        <div class="contact-actions">
+                            <a class="button button-primary" href="mailto:khanafroz23@gmail.com">Email Me</a>
+                            <a class="button button-secondary" href="https://github.com/afroz0009" target="_blank" rel="noreferrer">View GitHub</a>
                         </div>
                     </article>
-                    <aside class="contact-card">
+
+                    <aside class="panel contact-card">
+                        <strong>Details</strong>
                         <div class="contact-list">
                             <div class="contact-line">
                                 <span class="contact-key">Email</span>
-                                <a href="mailto:hello@example.com">hello@example.com</a>
-                            </div>
-                            <div class="contact-line">
-                                <span class="contact-key">LinkedIn</span>
-                                <a href="https://linkedin.com/in/your-profile" target="_blank"
-                                    rel="noreferrer">linkedin.com/in/your-profile</a>
+                                <span class="contact-value"><a href="mailto:khanafroz23@gmail.com">khanafroz23@gmail.com</a></span>
                             </div>
                             <div class="contact-line">
                                 <span class="contact-key">GitHub</span>
-                                <a href="https://github.com/your-username" target="_blank"
-                                    rel="noreferrer">github.com/your-username</a>
+                                <span class="contact-value"><a href="https://github.com/afroz0009" target="_blank" rel="noreferrer">github.com/afroz0009</a></span>
+                            </div>
+                            <div class="contact-line">
+                                <span class="contact-key">Portfolio Repo</span>
+                                <span class="contact-value">GitHub Pages deployment active</span>
+                            </div>
+                            <div class="contact-line">
+                                <span class="contact-key">Custom Domain</span>
+                                <span class="contact-value">afrozkhan.is-a.dev request pending review</span>
                             </div>
                             <div class="contact-line">
                                 <span class="contact-key">Location</span>
-                                <span>Mumbai, India</span>
+                                <span class="contact-value">India</span>
                             </div>
                         </div>
                     </aside>
                 </div>
-            </div>
-        </section>
-    </main>
+            </section>
+        </main>
 
-    <footer class="footer">
-        <div class="shell">
-            <span>&copy; <span id="year"></span> Afroz K. All rights reserved.</span>
-            <span>Single-file static portfolio for free hosting.</span>
-        </div>
-    </footer>
+        <footer>
+            <div class="footer-line">
+                <span>&copy; <span id="year"></span> Afroz Khan. All rights reserved.</span>
+                <span>Built as a single static HTML portfolio page.</span>
+            </div>
+        </footer>
+    </div>
 
     <script>
         document.getElementById("year").textContent = new Date().getFullYear();
     </script>
 </body>
-
 </html>
