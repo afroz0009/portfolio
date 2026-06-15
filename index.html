@@ -12,6 +12,9 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Space+Grotesk:wght@400;500;700&display=swap"
         rel="stylesheet">
+    <script>
+        document.documentElement.classList.add("js");
+    </script>
     <style>
         :root {
             --bg: #07111f;
@@ -50,6 +53,28 @@
                 radial-gradient(circle at top right, rgba(140, 184, 255, 0.18), transparent 28%),
                 radial-gradient(circle at 50% 120%, rgba(255, 138, 92, 0.12), transparent 34%),
                 linear-gradient(180deg, #05101d 0%, #081629 45%, #050c16 100%);
+        }
+
+        .js .reveal-on-scroll {
+            --reveal-opacity: 0;
+            --reveal-y: 34px;
+            --reveal-scale: 0.985;
+            --reveal-blur: 6px;
+            opacity: var(--reveal-opacity);
+            transform: translate3d(0, var(--reveal-y), 0) scale(var(--reveal-scale));
+            filter: blur(var(--reveal-blur));
+            transition:
+                opacity 720ms cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0ms),
+                transform 720ms cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0ms),
+                filter 720ms cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0ms);
+            will-change: opacity, transform, filter;
+        }
+
+        .js .reveal-on-scroll.is-visible {
+            --reveal-opacity: 1;
+            --reveal-y: 0px;
+            --reveal-scale: 1;
+            --reveal-blur: 0px;
         }
 
         a {
@@ -311,13 +336,49 @@
             border-radius: 50%;
         }
 
+        .proof-strip {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 16px;
+            margin-bottom: 28px;
+        }
+
+        .proof-card {
+            padding: 22px 20px;
+        }
+
+        .proof-value {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--accent);
+            font-family: "Space Grotesk", sans-serif;
+            font-size: clamp(1.6rem, 2.4vw, 2.2rem);
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .proof-label {
+            display: block;
+            color: #eef5ff;
+            font-size: 1rem;
+            font-weight: 700;
+            line-height: 1.35;
+        }
+
+        .proof-detail {
+            display: block;
+            margin-top: 8px;
+            color: var(--muted);
+            font-size: 0.92rem;
+            line-height: 1.6;
+        }
+
         .marquee-wrap {
             overflow: hidden;
             border: 1px solid var(--border);
             border-radius: 999px;
             background: rgba(255, 255, 255, 0.03);
             margin-bottom: 26px;
-            animation: fade-up 920ms ease 140ms both;
         }
 
         .marquee-track {
@@ -370,6 +431,7 @@
         }
 
         @keyframes hero-float {
+
             0%,
             100% {
                 transform: translateY(0);
@@ -765,6 +827,37 @@
             background: rgba(89, 240, 214, 0.08);
         }
 
+        .project-meta-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 12px;
+        }
+
+        .project-meta-item {
+            min-width: 0;
+            padding: 14px 15px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .project-meta-item span {
+            display: block;
+            margin-bottom: 6px;
+            color: var(--muted);
+            font-size: 0.74rem;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        .project-meta-item strong {
+            display: block;
+            color: #eef5ff;
+            font-size: 0.92rem;
+            line-height: 1.45;
+        }
+
         .project-copy h3 {
             margin: 0;
             font-family: "Space Grotesk", sans-serif;
@@ -810,6 +903,47 @@
         .project-feature:hover .project-copy h3 {
             color: #f7fbff;
             transform: translateY(-2px);
+        }
+
+        .workflow-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .workflow-card {
+            padding: 28px 24px;
+        }
+
+        .workflow-mark {
+            width: 44px;
+            height: 44px;
+            display: grid;
+            place-items: center;
+            margin-bottom: 16px;
+            border-radius: 14px;
+            border: 1px solid rgba(89, 240, 214, 0.24);
+            background:
+                radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.18), transparent 26%),
+                linear-gradient(145deg, rgba(89, 240, 214, 0.14), rgba(140, 184, 255, 0.18));
+            color: var(--accent);
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+        }
+
+        .workflow-card h3 {
+            margin: 0 0 12px;
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 1.28rem;
+            line-height: 1.2;
+        }
+
+        .workflow-card p {
+            margin: 0;
+            color: var(--muted);
+            line-height: 1.76;
         }
 
         .project-visual--content {
@@ -1727,6 +1861,11 @@
                 grid-template-columns: 1fr;
             }
 
+            .proof-strip,
+            .workflow-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
             .skill-grid {
                 grid-template-columns: repeat(2, minmax(0, 1fr));
             }
@@ -1771,6 +1910,12 @@
             }
 
             .skill-focus-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .proof-strip,
+            .workflow-grid,
+            .project-meta-grid {
                 grid-template-columns: 1fr;
             }
 
@@ -1844,6 +1989,13 @@
                 scroll-behavior: auto;
             }
 
+            .js .reveal-on-scroll,
+            .js .reveal-on-scroll.is-visible {
+                opacity: 1;
+                transform: none;
+                filter: none;
+            }
+
             .marquee-track,
             .hero>div:first-child,
             .hero-visual,
@@ -1901,26 +2053,26 @@
                     <h1>Hi, I'm <span>Afroz Khan</span></h1>
                     <p class="hero-tagline">Full-Stack Developer | Web3 Engineer | AI Workflow Explorer</p>
                     <p class="hero-summary">
-                        I build secure, high-performance digital products across Laravel, React.js, Vue.js, automation
-                        workflows, and web3-enabled systems. My recent work includes Bing Ads and Google Ads
-                        optimization tools, bulk article generation platforms, complex business workflows, blockchain
-                        infrastructure, and AI-assisted engineering pipelines.
+                        I build scalable full-stack applications with a strong focus on clean architecture, practical
+                        workflows, and reliable product delivery. My work brings together backend engineering, modern
+                        interfaces, AI-assisted automation, and Web3 development to turn complex ideas into usable
+                        software.
                     </p>
                     <div class="button-row">
                         <a class="button button-primary" href="#projects">View Projects</a>
                         <a class="button button-secondary" href="#contact">Hire Me</a>
                     </div>
                     <div class="hero-socials" aria-label="Social links">
-                        <a class="hero-social" href="https://github.com/afroz0009" target="_blank"
-                            rel="noreferrer" aria-label="GitHub profile">
+                        <a class="hero-social" href="https://github.com/afroz0009" target="_blank" rel="noreferrer"
+                            aria-label="GitHub profile">
                             <svg viewBox="0 0 24 24" aria-hidden="true">
                                 <path
                                     d="M12 .5C5.65.5.5 5.65.5 12a11.5 11.5 0 0 0 7.86 10.92c.58.11.79-.25.79-.56l-.02-1.98c-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.72-1.54-2.55-.29-5.23-1.28-5.23-5.68 0-1.25.45-2.27 1.18-3.07-.12-.29-.51-1.46.11-3.04 0 0 .97-.31 3.16 1.17a10.9 10.9 0 0 1 5.75 0c2.19-1.48 3.16-1.17 3.16-1.17.62 1.58.23 2.75.11 3.04.73.8 1.18 1.82 1.18 3.07 0 4.41-2.69 5.39-5.25 5.67.41.36.77 1.06.77 2.14l-.01 3.16c0 .31.21.68.8.56A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z" />
                             </svg>
                             <span>GitHub</span>
                         </a>
-                        <a class="hero-social" href="https://www.linkedin.com/in/afroz-khan-7a5a111a9/"
-                            target="_blank" rel="noreferrer" aria-label="LinkedIn profile">
+                        <a class="hero-social" href="https://www.linkedin.com/in/afroz-khan-7a5a111a9/" target="_blank"
+                            rel="noreferrer" aria-label="LinkedIn profile">
                             <svg viewBox="0 0 24 24" aria-hidden="true">
                                 <path
                                     d="M4.98 3.5A2.49 2.49 0 1 0 5 8.48 2.49 2.49 0 0 0 4.98 3.5ZM3 9h4v12H3Zm6 0h3.83v1.64h.05c.53-1.01 1.84-2.07 3.79-2.07 4.05 0 4.8 2.66 4.8 6.12V21h-4v-5.54c0-1.32-.02-3.02-1.84-3.02-1.85 0-2.13 1.45-2.13 2.93V21H9Z" />
@@ -1937,7 +2089,33 @@
                 </div>
             </section>
 
-            <div class="marquee-wrap" aria-label="Domains and focus areas">
+            <div class="proof-strip" aria-label="Quick proof points">
+                <article class="panel proof-card reveal-on-scroll">
+                    <span class="proof-value">5+</span>
+                    <span class="proof-label">Years building software</span>
+                    <span class="proof-detail">Full-stack delivery across product workflows and production
+                        systems.</span>
+                </article>
+                <article class="panel proof-card reveal-on-scroll">
+                    <span class="proof-value">Laravel</span>
+                    <span class="proof-label">Core delivery stack</span>
+                    <span class="proof-detail">Backend-heavy applications with modern UI and admin workflow
+                        support.</span>
+                </article>
+                <article class="panel proof-card reveal-on-scroll">
+                    <span class="proof-value">AI + Ads</span>
+                    <span class="proof-label">Automation-first work</span>
+                    <span class="proof-detail">Prompt pipelines, content tooling, and Google/Bing ads operations.</span>
+                </article>
+                <article class="panel proof-card reveal-on-scroll">
+                    <span class="proof-value">Web3</span>
+                    <span class="proof-label">Product experience</span>
+                    <span class="proof-detail">Wallet flows, crypto platforms, and real-time blockchain
+                        integrations.</span>
+                </article>
+            </div>
+
+            <div class="marquee-wrap reveal-on-scroll" aria-label="Domains and focus areas">
                 <div class="marquee-track">
                     <div class="marquee-group">
                         <span class="marquee-chip">Enterprise Lending Platforms</span>
@@ -1945,7 +2123,9 @@
                         <span class="marquee-chip">Loan Management Systems</span>
                         <span class="marquee-chip">Microservices Architecture</span>
                         <span class="marquee-chip">Blockchain Wallet Systems</span>
-                        <span class="marquee-chip">Real-Time APIs</span>
+                        <span class="marquee-chip">Bulk Article Tooling</span>
+                        <span class="marquee-chip">Google Ads API Workflows</span>
+                        <span class="marquee-chip">Bing Ads Automation</span>
                         <span class="marquee-chip">AI-Assisted Development</span>
                         <span class="marquee-chip">Automation Pipelines</span>
                     </div>
@@ -1955,7 +2135,9 @@
                         <span class="marquee-chip">Loan Management Systems</span>
                         <span class="marquee-chip">Microservices Architecture</span>
                         <span class="marquee-chip">Blockchain Wallet Systems</span>
-                        <span class="marquee-chip">Real-Time APIs</span>
+                        <span class="marquee-chip">Bulk Article Tooling</span>
+                        <span class="marquee-chip">Google Ads API Workflows</span>
+                        <span class="marquee-chip">Bing Ads Automation</span>
                         <span class="marquee-chip">AI-Assisted Development</span>
                         <span class="marquee-chip">Automation Pipelines</span>
                     </div>
@@ -1963,11 +2145,11 @@
             </div>
 
             <section class="section" id="about">
-                <div class="section-head section-head-centered">
+                <div class="section-head section-head-centered reveal-on-scroll">
                     <h2 class="section-title accent-heading">About Me</h2>
                 </div>
 
-                <article class="panel about-card">
+                <article class="panel about-card reveal-on-scroll">
                     <div class="about-layout">
                         <div>
                             <p class="about-side-label">Current Role</p>
@@ -2023,7 +2205,7 @@
             </section>
 
             <section class="section" id="skills">
-                <div class="section-head section-head-centered">
+                <div class="section-head section-head-centered reveal-on-scroll">
                     <h2 class="section-title accent-heading">Skills</h2>
                     <p class="section-copy">
                         Core technologies, tools, and product areas I use across backend systems, frontend delivery,
@@ -2031,7 +2213,7 @@
                     </p>
                 </div>
 
-                <article class="panel skill-stack-card">
+                <article class="panel skill-stack-card reveal-on-scroll">
                     <h3 class="skill-stack-title">Technology Stack &amp; Tools</h3>
                     <div class="skill-pill-cloud" aria-label="Technology stack and tools">
                         <span class="skill-pill">Laravel</span>
@@ -2069,26 +2251,26 @@
                 </article>
 
                 <div class="skill-focus-grid">
-                    <article class="skill-focus-card">
+                    <article class="skill-focus-card reveal-on-scroll">
                         <div class="skill-focus-mark">LP</div>
                         <h3>Laravel &amp; PHP</h3>
                         <p>REST APIs, workflow logic, reusable service layers, and business-ready backend systems.</p>
                     </article>
 
-                    <article class="skill-focus-card">
+                    <article class="skill-focus-card reveal-on-scroll">
                         <div class="skill-focus-mark">RV</div>
                         <h3>React &amp; Vue.js</h3>
                         <p>Responsive interfaces, dashboard systems, and product workflows built for real teams.</p>
                     </article>
 
-                    <article class="skill-focus-card">
+                    <article class="skill-focus-card reveal-on-scroll">
                         <div class="skill-focus-mark">AA</div>
                         <h3>Ads &amp; AI Automation</h3>
                         <p>Bing Ads, Google Ads, keyword flows, article tooling, and structured automation pipelines.
                         </p>
                     </article>
 
-                    <article class="skill-focus-card">
+                    <article class="skill-focus-card reveal-on-scroll">
                         <div class="skill-focus-mark">VS</div>
                         <h3>Web3 &amp; Vector Search</h3>
                         <p>Vector search, vector integration, wallets, smart contracts, and blockchain product support.
@@ -2098,7 +2280,7 @@
             </section>
 
             <section class="section" id="projects">
-                <div class="section-head section-head-centered">
+                <div class="section-head section-head-centered reveal-on-scroll">
                     <h2 class="section-title accent-heading">Projects</h2>
                     <p class="section-copy">
                         Selected products built around content automation, ad optimizer workflows, crypto products,
@@ -2107,7 +2289,7 @@
                 </div>
 
                 <div class="project-showcase">
-                    <article class="project-feature">
+                    <article class="project-feature reveal-on-scroll">
                         <div class="project-visual project-visual--content" aria-hidden="true">
                             <div class="browser-shell">
                                 <div class="browser-top">
@@ -2152,6 +2334,20 @@
                         <div class="project-copy">
                             <span class="project-type">AI Content Automation</span>
                             <h3>Bulk Article Tool for WordPress Publishing</h3>
+                            <div class="project-meta-grid">
+                                <div class="project-meta-item">
+                                    <span>Role</span>
+                                    <strong>Full-Stack Developer</strong>
+                                </div>
+                                <div class="project-meta-item">
+                                    <span>Timeline</span>
+                                    <strong>2025 - Present</strong>
+                                </div>
+                                <div class="project-meta-item">
+                                    <span>Domain</span>
+                                    <strong>Content Automation</strong>
+                                </div>
+                            </div>
                             <p>
                                 Built a bulk article creation platform that generates structured content, prepares
                                 publishing assets, and pushes approved articles directly to WordPress through a
@@ -2173,10 +2369,24 @@
                         </div>
                     </article>
 
-                    <article class="project-feature project-feature--reverse">
+                    <article class="project-feature project-feature--reverse reveal-on-scroll">
                         <div class="project-copy">
                             <span class="project-type">Ads Optimization Platform</span>
                             <h3>Google Ads &amp; Bing Ads Optimizers</h3>
+                            <div class="project-meta-grid">
+                                <div class="project-meta-item">
+                                    <span>Role</span>
+                                    <strong>Full-Stack Developer</strong>
+                                </div>
+                                <div class="project-meta-item">
+                                    <span>Timeline</span>
+                                    <strong>2025 - Present</strong>
+                                </div>
+                                <div class="project-meta-item">
+                                    <span>Domain</span>
+                                    <strong>Ads Automation</strong>
+                                </div>
+                            </div>
                             <p>
                                 Built and maintained optimizer platforms that create, update, and manage campaigns
                                 using Google and Bing REST APIs, with strong focus on bulk operations, campaign
@@ -2240,7 +2450,7 @@
                         </div>
                     </article>
 
-                    <article class="project-feature">
+                    <article class="project-feature reveal-on-scroll">
                         <div class="project-visual project-visual--wallet" aria-hidden="true">
                             <div class="wallet-shell">
                                 <div class="wallet-topbar">
@@ -2309,6 +2519,20 @@
                         <div class="project-copy">
                             <span class="project-type">Crypto Platform &amp; Wallet</span>
                             <h3>Multi-Chain Crypto Platform &amp; Wallet</h3>
+                            <div class="project-meta-grid">
+                                <div class="project-meta-item">
+                                    <span>Role</span>
+                                    <strong>Full-Stack Developer</strong>
+                                </div>
+                                <div class="project-meta-item">
+                                    <span>Timeline</span>
+                                    <strong>2021 - 2024</strong>
+                                </div>
+                                <div class="project-meta-item">
+                                    <span>Domain</span>
+                                    <strong>Crypto Platform</strong>
+                                </div>
+                            </div>
                             <p>
                                 Built a secure crypto platform and multi-chain wallet ecosystem supporting Ethereum,
                                 Polygon, Binance Smart Chain, and custom blockchain networks. Focused on transaction
@@ -2333,10 +2557,24 @@
                         </div>
                     </article>
 
-                    <article class="project-feature project-feature--reverse">
+                    <article class="project-feature project-feature--reverse reveal-on-scroll">
                         <div class="project-copy">
                             <span class="project-type">Social &amp; Crypto Platform</span>
                             <h3>Sirius Sync Ecosystem</h3>
+                            <div class="project-meta-grid">
+                                <div class="project-meta-item">
+                                    <span>Role</span>
+                                    <strong>Full-Stack Developer</strong>
+                                </div>
+                                <div class="project-meta-item">
+                                    <span>Timeline</span>
+                                    <strong>2021 - 2024</strong>
+                                </div>
+                                <div class="project-meta-item">
+                                    <span>Domain</span>
+                                    <strong>Social + Rewards</strong>
+                                </div>
+                            </div>
                             <p>
                                 Built a scalable social media ecosystem integrated with reward systems, crypto wallet
                                 infrastructure, engagement systems, and high-performance APIs. Designed to support
@@ -2447,19 +2685,59 @@
                 </div>
             </section>
 
+            <section class="section" id="how-i-work">
+                <div class="section-head section-head-centered reveal-on-scroll">
+                    <h2 class="section-title accent-heading">How I Work</h2>
+                    <p class="section-copy">
+                        The working style behind how I build products, structure features, and keep delivery practical
+                        for teams.
+                    </p>
+                </div>
+
+                <div class="workflow-grid">
+                    <article class="panel workflow-card reveal-on-scroll">
+                        <div class="workflow-mark">01</div>
+                        <h3>Start with structure</h3>
+                        <p>I break complex requirements into clear flows, states, and backend steps before coding
+                            begins.</p>
+                    </article>
+
+                    <article class="panel workflow-card reveal-on-scroll">
+                        <div class="workflow-mark">02</div>
+                        <h3>Build for real use</h3>
+                        <p>I focus on workflows teams will actually use day to day, not just features that look
+                            complete.</p>
+                    </article>
+
+                    <article class="panel workflow-card reveal-on-scroll">
+                        <div class="workflow-mark">03</div>
+                        <h3>Use AI practically</h3>
+                        <p>I use prompts, automation, and agent-style steps where they improve speed without losing
+                            control.</p>
+                    </article>
+
+                    <article class="panel workflow-card reveal-on-scroll">
+                        <div class="workflow-mark">04</div>
+                        <h3>Stay close to delivery</h3>
+                        <p>I care about debugging, validation, and release readiness so product ideas become dependable
+                            software.</p>
+                    </article>
+                </div>
+            </section>
+
             <section class="section" id="experience">
-                <div class="section-head section-head-centered">
+                <div class="section-head section-head-centered reveal-on-scroll">
                     <h2 class="section-title accent-heading">Experience</h2>
                 </div>
 
                 <div class="experience-timeline">
-                    <article class="experience-item">
+                    <article class="experience-item reveal-on-scroll">
                         <h3 class="experience-role">Laravel Developer - <span class="experience-role-company">Dinero
                                 Software</span></h3>
                         <p class="experience-years">2025 - Present</p>
                     </article>
 
-                    <article class="experience-item">
+                    <article class="experience-item reveal-on-scroll">
                         <h3 class="experience-role">Full-Stack Developer - <span class="experience-role-company">XANAX
                                 Technology</span></h3>
                         <p class="experience-years">2021 - 2024</p>
@@ -2468,7 +2746,7 @@
             </section>
 
             <section class="section" id="contact">
-                <div class="section-head section-head-centered">
+                <div class="section-head section-head-centered reveal-on-scroll">
                     <h2 class="section-title accent-heading">Contact</h2>
                     <p class="section-copy">
                         Open to full-stack development, Laravel builds, AI workflow projects, and product-focused
@@ -2477,7 +2755,7 @@
                 </div>
 
                 <div class="contact-grid">
-                    <article class="panel contact-card contact-card--lead">
+                    <article class="panel contact-card contact-card--lead reveal-on-scroll">
                         <strong>Let&apos;s Connect</strong>
                         <h3>Available for practical product builds and modern engineering work.</h3>
                         <p>
@@ -2495,19 +2773,9 @@
                         </div>
                     </article>
 
-                    <aside class="panel contact-card contact-card--details">
+                    <aside class="panel contact-card contact-card--details reveal-on-scroll">
                         <strong>Direct Details</strong>
                         <div class="contact-list">
-                            <div class="contact-line">
-                                <span class="contact-key">GitHub</span>
-                                <span class="contact-value"><a href="https://github.com/afroz0009" target="_blank"
-                                        rel="noreferrer">github.com/afroz0009</a></span>
-                            </div>
-                            <div class="contact-line">
-                                <span class="contact-key">LinkedIn</span>
-                                <span class="contact-value"><a href="https://www.linkedin.com/in/afroz-khan-7a5a111a9/"
-                                        target="_blank" rel="noreferrer">afroz-khan-7a5a111a9</a></span>
-                            </div>
                             <div class="contact-line">
                                 <span class="contact-key">Contact</span>
                                 <span class="contact-value"><a href="tel:+919892637997">+91 989 263 7997</a></span>
@@ -2517,6 +2785,16 @@
                                 <span class="contact-value"><a
                                         href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=khanafroz7887@gmail.com"
                                         target="_blank" rel="noreferrer">khanafroz7887@gmail.com</a></span>
+                            </div>
+                            <div class="contact-line">
+                                <span class="contact-key">GitHub</span>
+                                <span class="contact-value"><a href="https://github.com/afroz0009" target="_blank"
+                                        rel="noreferrer">github.com/afroz0009</a></span>
+                            </div>
+                            <div class="contact-line">
+                                <span class="contact-key">LinkedIn</span>
+                                <span class="contact-value"><a href="https://www.linkedin.com/in/afroz-khan-7a5a111a9/"
+                                        target="_blank" rel="noreferrer">afroz-khan-7a5a111a9</a></span>
                             </div>
                             <div class="contact-line">
                                 <span class="contact-key">Location</span>
@@ -2529,7 +2807,7 @@
         </main>
 
         <footer>
-            <div class="footer-line">
+            <div class="footer-line reveal-on-scroll">
                 <span>&copy; <span id="year"></span> Afroz Khan. All rights reserved.</span>
             </div>
         </footer>
@@ -2537,6 +2815,58 @@
 
     <script>
         document.getElementById("year").textContent = new Date().getFullYear();
+
+        const revealGroups = [
+            [".proof-card", 0, 90],
+            [".marquee-wrap", 60, 0],
+            ["#about .section-head", 0, 0],
+            ["#about .about-card", 120, 0],
+            ["#skills .section-head", 0, 0],
+            ["#skills .skill-stack-card", 100, 0],
+            ["#skills .skill-focus-card", 160, 90],
+            ["#projects .section-head", 0, 0],
+            ["#projects .project-feature", 120, 140],
+            ["#how-i-work .section-head", 0, 0],
+            ["#how-i-work .workflow-card", 120, 90],
+            ["#experience .section-head", 0, 0],
+            ["#experience .experience-item", 120, 120],
+            ["#contact .section-head", 0, 0],
+            ["#contact .contact-card", 120, 120],
+            ["footer .footer-line", 0, 0]
+        ];
+
+        revealGroups.forEach(([selector, baseDelay, step]) => {
+            document.querySelectorAll(selector).forEach((element, index) => {
+                element.style.setProperty("--reveal-delay", `${baseDelay + index * step}ms`);
+            });
+        });
+
+        const revealElements = document.querySelectorAll(".reveal-on-scroll");
+        const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+        if (reduceMotion || !("IntersectionObserver" in window)) {
+            revealElements.forEach((element) => {
+                element.classList.add("is-visible");
+            });
+        } else {
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (!entry.isIntersecting) {
+                        return;
+                    }
+
+                    entry.target.classList.add("is-visible");
+                    revealObserver.unobserve(entry.target);
+                });
+            }, {
+                threshold: 0.18,
+                rootMargin: "0px 0px -10% 0px"
+            });
+
+            revealElements.forEach((element) => {
+                revealObserver.observe(element);
+            });
+        }
     </script>
 </body>
 
