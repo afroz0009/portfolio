@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Afroz K. | Portfolio</title>
+    <meta name="description"
+        content="Portfolio website for Afroz K. showcasing web development, automation, and AI workflow projects.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0d1417;
+            --bg-soft: #152026;
+            --surface: rgba(255, 255, 255, 0.06);
+            --surface-strong: rgba(255, 255, 255, 0.1);
+            --text: #eef6f2;
+            --muted: #9bb5ab;
+            --line: rgba(255, 255, 255, 0.14);
+            --accent: #ff7b54;
+            --accent-soft: #ffd166;
+            --mint: #64f4c8;
+            --shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
+            --radius: 24px;
+            --radius-sm: 16px;
+            --max: 1180px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Manrope", sans-serif;
+            background:
+                radial-gradient(circle at top left, rgba(255, 123, 84, 0.18), transparent 30%),
+                radial-gradient(circle at 85% 15%, rgba(100, 244, 200, 0.16), transparent 24%),
+                linear-gradient(180deg, #071015 0%, #0d1417 40%, #101c20 100%);
+            color: var(--text);
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        .shell {
+            width: min(calc(100% - 32px), var(--max));
+            margin: 0 auto;
+        }
+
+        .topbar {
+            position: sticky;
+            top: 0;
+            z-index: 30;
+            backdrop-filter: blur(18px);
+            background: rgba(7, 16, 21, 0.72);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .topbar .shell {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px 0;
+        }
+
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 1rem;
+            letter-spacing: 0.04em;
+        }
+
+        .brand-mark {
+            width: 42px;
+            height: 42px;
+            display: grid;
+            place-items: center;
+            border-radius: 14px;
+            color: #101c20;
+            background: linear-gradient(135deg, var(--mint), var(--accent-soft));
+            font-weight: 700;
+        }
+
+        .nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            color: var(--muted);
+            font-size: 0.96rem;
+        }
+
+        .hero {
+            padding: 64px 0 28px;
+        }
+
+        .hero-grid {
+            display: grid;
+            gap: 28px;
+            grid-template-columns: 1.15fr 0.85fr;
+            align-items: stretch;
+        }
+
+        .hero-copy,
+        .hero-panel,
+        .section-card,
+        .project,
+        .timeline-item,
+        .contact-card {
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        .hero-copy {
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-copy::after {
+            content: "";
+            position: absolute;
+            inset: auto -60px -60px auto;
+            width: 180px;
+            height: 180px;
+            border-radius: 999px;
+            background: radial-gradient(circle, rgba(255, 209, 102, 0.22), transparent 70%);
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 14px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--muted);
+            font-size: 0.9rem;
+            letter-spacing: 0.02em;
+        }
+
+        .eyebrow::before {
+            content: "";
+            width: 10px;
+            height: 10px;
+            border-radius: 999px;
+            background: var(--mint);
+            box-shadow: 0 0 0 6px rgba(100, 244, 200, 0.14);
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: "Space Grotesk", sans-serif;
+            line-height: 1.02;
+            margin: 0;
+        }
+
+        h1 {
+            margin-top: 22px;
+            font-size: clamp(2.8rem, 6vw, 5.6rem);
+            max-width: 10ch;
+        }
+
+        .hero-copy p {
+            margin: 22px 0 0;
+            max-width: 62ch;
+            color: var(--muted);
+            font-size: 1.05rem;
+            line-height: 1.75;
+        }
+
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-top: 30px;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            min-height: 50px;
+            padding: 0 20px;
+            border-radius: 999px;
+            border: 1px solid transparent;
+            font-weight: 700;
+            transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+        }
+
+        .button:hover {
+            transform: translateY(-1px);
+        }
+
+        .button-primary {
+            color: #0d1417;
+            background: linear-gradient(135deg, var(--accent-soft), var(--accent));
+        }
+
+        .button-secondary {
+            background: rgba(255, 255, 255, 0.04);
+            border-color: var(--line);
+        }
+
+        .hero-panel {
+            padding: 26px;
+            display: grid;
+            gap: 16px;
+        }
+
+        .hero-panel-top {
+            display: grid;
+            gap: 14px;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .metric,
+        .mini-card {
+            padding: 18px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: var(--radius-sm);
+        }
+
+        .metric strong,
+        .mini-card strong {
+            display: block;
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 1.6rem;
+            margin-bottom: 8px;
+        }
+
+        .metric span,
+        .mini-card span {
+            color: var(--muted);
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .spotlight {
+            padding: 22px;
+            border-radius: var(--radius-sm);
+            background:
+                linear-gradient(180deg, rgba(255, 123, 84, 0.12), rgba(255, 123, 84, 0)),
+                rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 123, 84, 0.22);
+        }
+
+        .spotlight p {
+            color: var(--muted);
+            line-height: 1.7;
+            margin: 10px 0 0;
+        }
+
+        .section {
+            padding: 28px 0;
+        }
+
+        .section-heading {
+            display: flex;
+            justify-content: space-between;
+            gap: 16px;
+            align-items: end;
+            margin-bottom: 20px;
+        }
+
+        .section-heading p {
+            margin: 0;
+            max-width: 52ch;
+            color: var(--muted);
+            line-height: 1.7;
+        }
+
+        .grid-3 {
+            display: grid;
+            gap: 18px;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .section-card {
+            padding: 26px;
+        }
+
+        .section-card h3 {
+            margin-bottom: 12px;
+            font-size: 1.35rem;
+        }
+
+        .section-card p {
+            margin: 0;
+            color: var(--muted);
+            line-height: 1.7;
+        }
+
+        .project-grid {
+            display: grid;
+            gap: 18px;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .project {
+            padding: 26px;
+        }
+
+        .project-label {
+            display: inline-block;
+            margin-bottom: 14px;
+            color: var(--accent-soft);
+            font-size: 0.85rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .project p {
+            margin: 14px 0 0;
+            color: var(--muted);
+            line-height: 1.7;
+        }
+
+        .project ul {
+            margin: 18px 0 0;
+            padding-left: 18px;
+            color: var(--muted);
+            line-height: 1.8;
+        }
+
+        .timeline {
+            display: grid;
+            gap: 16px;
+        }
+
+        .timeline-item {
+            padding: 22px 24px;
+            display: grid;
+            gap: 14px;
+            grid-template-columns: 140px 1fr;
+        }
+
+        .timeline-date {
+            color: var(--accent-soft);
+            font-family: "Space Grotesk", sans-serif;
+        }
+
+        .timeline-copy h3 {
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .timeline-copy p {
+            margin: 0;
+            color: var(--muted);
+            line-height: 1.7;
+        }
+
+        .contact-grid {
+            display: grid;
+            gap: 18px;
+            grid-template-columns: 1.1fr 0.9fr;
+        }
+
+        .contact-card {
+            padding: 30px;
+        }
+
+        .contact-card p {
+            color: var(--muted);
+            line-height: 1.7;
+        }
+
+        .contact-list {
+            display: grid;
+            gap: 14px;
+            margin-top: 18px;
+        }
+
+        .contact-line {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: space-between;
+            padding-bottom: 14px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .contact-line:last-child {
+            padding-bottom: 0;
+            border-bottom: 0;
+        }
+
+        .contact-key {
+            color: var(--muted);
+        }
+
+        .footer {
+            padding: 34px 0 48px;
+            color: var(--muted);
+            font-size: 0.92rem;
+        }
+
+        .footer .shell {
+            display: flex;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding-top: 20px;
+        }
+
+        @media (max-width: 980px) {
+
+            .hero-grid,
+            .grid-3,
+            .project-grid,
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline-item {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-panel-top {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 640px) {
+
+            .topbar .shell,
+            .section-heading,
+            .footer .shell {
+                display: grid;
+            }
+
+            .nav {
+                gap: 12px 18px;
+            }
+
+            .hero {
+                padding-top: 40px;
+            }
+
+            .hero-copy,
+            .hero-panel,
+            .section-card,
+            .project,
+            .timeline-item,
+            .contact-card {
+                padding: 22px;
+            }
+
+            .hero-panel-top {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: clamp(2.3rem, 12vw, 4rem);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="topbar">
+        <div class="shell">
+            <a class="brand" href="#home">
+                <span class="brand-mark">AK</span>
+                <span>Afroz K.</span>
+            </a>
+            <nav class="nav">
+                <a href="#about">About</a>
+                <a href="#work">Work</a>
+                <a href="#services">Services</a>
+                <a href="#contact">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main id="home">
+        <section class="hero">
+            <div class="shell hero-grid">
+                <article class="hero-copy">
+                    <span class="eyebrow">Available for freelance and product collaborations</span>
+                    <h1>Building useful web experiences with clarity and speed.</h1>
+                    <p>
+                        I design and ship polished web products, automation workflows, and AI-powered tools.
+                        My focus is simple: make things faster, clearer, and easier to use.
+                    </p>
+                    <div class="actions">
+                        <a class="button button-primary" href="#work">View Projects</a>
+                        <a class="button button-secondary" href="#contact">Contact Me</a>
+                    </div>
+                </article>
+
+                <aside class="hero-panel">
+                    <div class="hero-panel-top">
+                        <div class="metric">
+                            <strong>5+</strong>
+                            <span>Years exploring product builds, AI workflows, and practical automation.</span>
+                        </div>
+                        <div class="metric">
+                            <strong>24/7</strong>
+                            <span>Product thinking with a builder mindset focused on real output.</span>
+                        </div>
+                    </div>
+                    <div class="spotlight">
+                        <h3>What I do best</h3>
+                        <p>
+                            I turn ideas into working interfaces, admin dashboards, landing pages,
+                            and internal tools that feel sharp on desktop and mobile.
+                        </p>
+                    </div>
+                    <div class="mini-card">
+                        <strong>Current focus</strong>
+                        <span>Static websites, portfolio experiences, lightweight product pages, and AI-assisted
+                            business workflows.</span>
+                    </div>
+                </aside>
+            </div>
+        </section>
+
+        <section class="section" id="about">
+            <div class="shell">
+                <div class="section-heading">
+                    <div>
+                        <h2>About</h2>
+                    </div>
+                    <p>
+                        This portfolio is built as a clean static website so it can be deployed quickly on free hosting.
+                        You can edit the text, links, and project details directly in one HTML file.
+                    </p>
+                </div>
+                <div class="grid-3">
+                    <article class="section-card">
+                        <h3>Frontend</h3>
+                        <p>I build responsive interfaces with strong visual hierarchy, clear messaging, and practical
+                            user flows.</p>
+                    </article>
+                    <article class="section-card">
+                        <h3>Automation</h3>
+                        <p>I connect repetitive business tasks with scripts, APIs, and AI workflows to save time and
+                            reduce manual work.</p>
+                    </article>
+                    <article class="section-card">
+                        <h3>Execution</h3>
+                        <p>I prefer simple systems that are easy to launch, easy to maintain, and ready to improve over
+                            time.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="work">
+            <div class="shell">
+                <div class="section-heading">
+                    <div>
+                        <h2>Selected Work</h2>
+                    </div>
+                    <p>
+                        Replace these cards with your real projects. Keep the title, short summary, and 2 to 3 bullets
+                        for each project.
+                    </p>
+                </div>
+                <div class="project-grid">
+                    <article class="project">
+                        <span class="project-label">Project 01</span>
+                        <h3>AI Article Workflow</h3>
+                        <p>
+                            A content generation workflow that combines keyword extraction, structured article creation,
+                            and feature image generation in one publishing pipeline.
+                        </p>
+                        <ul>
+                            <li>Built structured multi-step AI flow</li>
+                            <li>Added timing and debug visibility</li>
+                            <li>Prepared content for static publishing</li>
+                        </ul>
+                    </article>
+                    <article class="project">
+                        <span class="project-label">Project 02</span>
+                        <h3>Portfolio Landing System</h3>
+                        <p>
+                            A fast-loading portfolio page designed for free static hosting with clear sections, strong
+                            typography,
+                            and zero build-step deployment.
+                        </p>
+                        <ul>
+                            <li>Single-file HTML deployment</li>
+                            <li>Responsive mobile-first layout</li>
+                            <li>Optimized for free hosting platforms</li>
+                        </ul>
+                    </article>
+                    <article class="project">
+                        <span class="project-label">Project 03</span>
+                        <h3>Operations Dashboard</h3>
+                        <p>
+                            A dashboard concept for internal teams to monitor campaign status, performance indicators,
+                            and workflow actions without unnecessary complexity.
+                        </p>
+                        <ul>
+                            <li>Focused visual hierarchy</li>
+                            <li>Fast navigation between core states</li>
+                            <li>Clean summary-first design</li>
+                        </ul>
+                    </article>
+                    <article class="project">
+                        <span class="project-label">Project 04</span>
+                        <h3>Client Automation Toolkit</h3>
+                        <p>
+                            A lightweight collection of scripts and integrations that reduce manual processing for lead
+                            handling,
+                            reports, and repetitive content tasks.
+                        </p>
+                        <ul>
+                            <li>Reduced manual repeat work</li>
+                            <li>Improved speed of delivery</li>
+                            <li>Easy to adapt per client need</li>
+                        </ul>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="services">
+            <div class="shell">
+                <div class="section-heading">
+                    <div>
+                        <h2>Services</h2>
+                    </div>
+                    <p>
+                        Keep this section if you want your portfolio to act like a lead page, or remove it if you want a
+                        simpler personal profile.
+                    </p>
+                </div>
+                <div class="timeline">
+                    <article class="timeline-item">
+                        <div class="timeline-date">01</div>
+                        <div class="timeline-copy">
+                            <h3>Static Website Builds</h3>
+                            <p>I create fast portfolio sites, landing pages, and company profile pages that are easy to
+                                host and easy to update.</p>
+                        </div>
+                    </article>
+                    <article class="timeline-item">
+                        <div class="timeline-date">02</div>
+                        <div class="timeline-copy">
+                            <h3>AI Workflow Setup</h3>
+                            <p>I help turn manual content or business tasks into repeatable AI-assisted flows with
+                                prompts, automation, and clear outputs.</p>
+                        </div>
+                    </article>
+                    <article class="timeline-item">
+                        <div class="timeline-date">03</div>
+                        <div class="timeline-copy">
+                            <h3>Interface Cleanup</h3>
+                            <p>I improve structure, copy flow, and visual presentation so existing screens feel more
+                                focused and easier to use.</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="contact">
+            <div class="shell">
+                <div class="section-heading">
+                    <div>
+                        <h2>Contact</h2>
+                    </div>
+                    <p>
+                        Update these links before publishing. You can also remove any row you do not want to show
+                        publicly.
+                    </p>
+                </div>
+                <div class="contact-grid">
+                    <article class="contact-card">
+                        <h3>Let us build something useful.</h3>
+                        <p>
+                            If you need a portfolio site, landing page, dashboard front-end, or a simple AI workflow,
+                            reach out and we can shape a focused plan from there.
+                        </p>
+                        <div class="actions">
+                            <a class="button button-primary" href="mailto:hello@example.com">Email Me</a>
+                            <a class="button button-secondary" href="https://github.com/" target="_blank"
+                                rel="noreferrer">GitHub</a>
+                        </div>
+                    </article>
+                    <aside class="contact-card">
+                        <div class="contact-list">
+                            <div class="contact-line">
+                                <span class="contact-key">Email</span>
+                                <a href="mailto:hello@example.com">hello@example.com</a>
+                            </div>
+                            <div class="contact-line">
+                                <span class="contact-key">LinkedIn</span>
+                                <a href="https://linkedin.com/in/your-profile" target="_blank"
+                                    rel="noreferrer">linkedin.com/in/your-profile</a>
+                            </div>
+                            <div class="contact-line">
+                                <span class="contact-key">GitHub</span>
+                                <a href="https://github.com/your-username" target="_blank"
+                                    rel="noreferrer">github.com/your-username</a>
+                            </div>
+                            <div class="contact-line">
+                                <span class="contact-key">Location</span>
+                                <span>Mumbai, India</span>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="shell">
+            <span>&copy; <span id="year"></span> Afroz K. All rights reserved.</span>
+            <span>Single-file static portfolio for free hosting.</span>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+</body>
+
+</html>
