@@ -113,6 +113,13 @@
             box-shadow: 0 18px 50px rgba(0, 0, 0, 0.25);
         }
 
+        .topbar-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+
         .brand {
             display: inline-flex;
             align-items: center;
@@ -131,6 +138,53 @@
             background: linear-gradient(135deg, rgba(89, 240, 214, 0.18), rgba(140, 184, 255, 0.32));
             border: 1px solid rgba(89, 240, 214, 0.28);
             color: var(--accent);
+        }
+
+        .menu-toggle {
+            display: none;
+            width: 46px;
+            height: 46px;
+            padding: 0;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.03);
+            color: #eefbff;
+            cursor: pointer;
+            transition: transform 180ms ease, border-color 180ms ease, background 180ms ease, box-shadow 180ms ease;
+        }
+
+        .menu-toggle:hover,
+        .menu-toggle:focus-visible {
+            transform: translateY(-2px);
+            border-color: rgba(89, 240, 214, 0.34);
+            background: rgba(89, 240, 214, 0.08);
+            box-shadow: 0 16px 28px rgba(89, 240, 214, 0.08);
+            outline: none;
+        }
+
+        .menu-toggle-box {
+            display: grid;
+            gap: 5px;
+        }
+
+        .menu-toggle-bar {
+            width: 18px;
+            height: 2px;
+            border-radius: 999px;
+            background: currentColor;
+            transition: transform 180ms ease, opacity 180ms ease;
+        }
+
+        .topbar.is-menu-open .menu-toggle-bar:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+
+        .topbar.is-menu-open .menu-toggle-bar:nth-child(2) {
+            opacity: 0;
+        }
+
+        .topbar.is-menu-open .menu-toggle-bar:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
         }
 
         .nav {
@@ -1825,6 +1879,7 @@
 
         .button:focus-visible,
         .hero-social:focus-visible,
+        .menu-toggle:focus-visible,
         .nav a:focus-visible,
         .contact-value a:focus-visible {
             outline: none;
@@ -1845,6 +1900,64 @@
             gap: 12px;
             padding-top: 24px;
             border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .back-to-top {
+            position: fixed;
+            right: 22px;
+            bottom: 22px;
+            z-index: 24;
+            width: 54px;
+            height: 54px;
+            display: inline-grid;
+            place-items: center;
+            padding: 0;
+            border: 1px solid rgba(89, 240, 214, 0.3);
+            border-radius: 50%;
+            background:
+                radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.18), transparent 26%),
+                linear-gradient(145deg, rgba(89, 240, 214, 0.18), rgba(140, 184, 255, 0.24)),
+                rgba(8, 18, 34, 0.9);
+            color: #eefbff;
+            box-shadow: 0 18px 42px rgba(0, 0, 0, 0.28);
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(16px) scale(0.92);
+            pointer-events: none;
+            transition:
+                opacity 220ms ease,
+                transform 220ms ease,
+                border-color 220ms ease,
+                box-shadow 220ms ease,
+                background 220ms ease;
+        }
+
+        .back-to-top.is-visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            pointer-events: auto;
+        }
+
+        .back-to-top:hover,
+        .back-to-top:focus-visible {
+            outline: none;
+            transform: translateY(-4px) scale(1.02);
+            border-color: rgba(89, 240, 214, 0.46);
+            box-shadow: 0 24px 52px rgba(0, 0, 0, 0.34);
+            background:
+                radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.22), transparent 26%),
+                linear-gradient(145deg, rgba(89, 240, 214, 0.24), rgba(140, 184, 255, 0.28)),
+                rgba(8, 18, 34, 0.94);
+        }
+
+        .back-to-top svg {
+            width: 20px;
+            height: 20px;
+            stroke: currentColor;
+            stroke-width: 2.4;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
         }
 
         @media (max-width: 1080px) {
@@ -1888,38 +2001,75 @@
             }
 
             .topbar-wrap {
+                position: static;
+                top: auto;
                 padding-top: 12px;
             }
 
             .topbar {
                 flex-direction: column;
                 align-items: stretch;
-                gap: 14px;
-                padding: 16px 18px 18px;
-                border-radius: 24px;
+                gap: 0;
+                padding: 14px 16px 16px;
+                border-radius: 22px;
+            }
+
+            .topbar-head {
+                width: 100%;
             }
 
             .brand {
                 width: max-content;
+                margin: 0;
+            }
+
+            .js .menu-toggle {
+                display: inline-grid;
+                place-items: center;
+                flex: 0 0 auto;
+            }
+
+            .js .nav {
+                width: 100%;
+                margin-top: 0;
+                padding-top: 0;
+                max-height: 0;
+                overflow: hidden;
+                opacity: 0;
+                pointer-events: none;
+                transform: translateY(-8px);
+                transition: max-height 220ms ease, opacity 220ms ease, transform 220ms ease, padding-top 220ms ease, margin-top 220ms ease;
+            }
+
+            .js .topbar.is-menu-open .nav {
+                margin-top: 14px;
+                padding-top: 14px;
+                max-height: 320px;
+                opacity: 1;
+                pointer-events: auto;
+                transform: translateY(0);
+                border-top: 1px solid rgba(255, 255, 255, 0.08);
             }
 
             .nav {
-                display: grid;
-                grid-template-columns: repeat(3, minmax(0, 1fr));
-                justify-items: center;
-                gap: 10px 12px;
+                display: flex;
+                flex-direction: column;
+                align-items: stretch;
+                gap: 4px;
                 width: 100%;
+                margin: 0;
             }
 
             .nav a {
                 width: 100%;
-                font-size: 0.92rem;
-                text-align: center;
+                padding: 8px 2px;
+                font-size: 0.96rem;
+                text-align: left;
             }
 
             .hero {
                 gap: 24px;
-                padding-top: 42px;
+                padding-top: 28px;
             }
 
             .hero-summary {
@@ -2031,6 +2181,13 @@
             .contact-value {
                 text-align: left;
             }
+
+            .back-to-top {
+                right: 18px;
+                bottom: 18px;
+                width: 50px;
+                height: 50px;
+            }
         }
 
         @media (max-width: 520px) {
@@ -2039,17 +2196,12 @@
             }
 
             .brand {
-                margin: 0 auto;
+                margin: 0;
             }
 
-            .nav {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-                gap: 10px;
-            }
-
-            .nav a:last-child {
-                grid-column: 1 / -1;
-                max-width: 160px;
+            .menu-toggle {
+                width: 44px;
+                height: 44px;
             }
 
             .hero h1 {
@@ -2078,6 +2230,13 @@
             .portrait-frame {
                 width: min(248px, 72vw);
             }
+
+            .back-to-top {
+                right: 14px;
+                bottom: 14px;
+                width: 46px;
+                height: 46px;
+            }
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -2101,7 +2260,10 @@
 
             .button,
             .hero-social,
+            .menu-toggle,
+            .menu-toggle-bar,
             .nav a,
+            .js .nav,
             .panel,
             .skill-focus-card,
             .skill-focus-mark,
@@ -2118,7 +2280,8 @@
             .wallet-network,
             .wallet-action,
             .portrait-frame,
-            .contact-value a {
+            .contact-value a,
+            .back-to-top {
                 transition: none;
             }
         }
@@ -2129,11 +2292,21 @@
     <div class="page-shell">
         <div class="topbar-wrap">
             <header class="topbar">
-                <a class="brand" href="#home" aria-label="Afroz Khan home">
-                    <span class="brand-mark">AK</span>
-                    <span>Afroz Khan</span>
-                </a>
-                <nav class="nav" aria-label="Primary">
+                <div class="topbar-head">
+                    <a class="brand" href="#home" aria-label="Afroz Khan home">
+                        <span class="brand-mark">AK</span>
+                        <span>Afroz Khan</span>
+                    </a>
+                    <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false"
+                        aria-controls="siteNav" aria-label="Open menu">
+                        <span class="menu-toggle-box" aria-hidden="true">
+                            <span class="menu-toggle-bar"></span>
+                            <span class="menu-toggle-bar"></span>
+                            <span class="menu-toggle-bar"></span>
+                        </span>
+                    </button>
+                </div>
+                <nav class="nav" id="siteNav" aria-label="Primary">
                     <a href="#about">About</a>
                     <a href="#skills">Skills</a>
                     <a href="#projects">Projects</a>
@@ -2180,7 +2353,7 @@
 
                 <div class="hero-visual">
                     <div class="portrait-frame">
-                        <img src="profile-crop.png" alt="Portrait of Afroz Khan">
+                        <img src="profile-crop.jpg" alt="Portrait of Afroz Khan">
                     </div>
                 </div>
             </section>
@@ -2907,6 +3080,13 @@
                 <span>&copy; <span id="year"></span> Afroz Khan. All rights reserved.</span>
             </div>
         </footer>
+
+        <button class="back-to-top" id="backToTop" type="button" aria-label="Back to top">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 19V5"></path>
+                <path d="M6 11l6-6 6 6"></path>
+            </svg>
+        </button>
     </div>
 
     <script>
@@ -2939,6 +3119,23 @@
 
         const revealElements = document.querySelectorAll(".reveal-on-scroll");
         const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        const backToTop = document.getElementById("backToTop");
+        const topbar = document.querySelector(".topbar");
+        const menuToggle = document.getElementById("menuToggle");
+        const siteNav = document.getElementById("siteNav");
+        const mobileMenuQuery = window.matchMedia("(max-width: 760px)");
+
+        const closeMenu = () => {
+            topbar.classList.remove("is-menu-open");
+            menuToggle.setAttribute("aria-expanded", "false");
+            menuToggle.setAttribute("aria-label", "Open menu");
+        };
+
+        const openMenu = () => {
+            topbar.classList.add("is-menu-open");
+            menuToggle.setAttribute("aria-expanded", "true");
+            menuToggle.setAttribute("aria-label", "Close menu");
+        };
 
         if (reduceMotion || !("IntersectionObserver" in window)) {
             revealElements.forEach((element) => {
@@ -2963,6 +3160,61 @@
                 revealObserver.observe(element);
             });
         }
+
+        const toggleBackToTop = () => {
+            backToTop.classList.toggle("is-visible", window.scrollY > 520);
+        };
+
+        window.addEventListener("scroll", toggleBackToTop, { passive: true });
+        toggleBackToTop();
+
+        backToTop.addEventListener("click", () => {
+            window.scrollTo({
+                top: 0,
+                behavior: reduceMotion ? "auto" : "smooth"
+            });
+        });
+
+        menuToggle.addEventListener("click", () => {
+            if (topbar.classList.contains("is-menu-open")) {
+                closeMenu();
+                return;
+            }
+
+            openMenu();
+        });
+
+        siteNav.querySelectorAll("a").forEach((link) => {
+            link.addEventListener("click", () => {
+                if (mobileMenuQuery.matches) {
+                    closeMenu();
+                }
+            });
+        });
+
+        document.addEventListener("click", (event) => {
+            if (!mobileMenuQuery.matches || !topbar.classList.contains("is-menu-open")) {
+                return;
+            }
+
+            if (topbar.contains(event.target)) {
+                return;
+            }
+
+            closeMenu();
+        });
+
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "Escape") {
+                closeMenu();
+            }
+        });
+
+        window.addEventListener("resize", () => {
+            if (!mobileMenuQuery.matches) {
+                closeMenu();
+            }
+        });
     </script>
 </body>
 
